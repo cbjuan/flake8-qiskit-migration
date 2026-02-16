@@ -1,18 +1,30 @@
 # flake8-qiskit-migration
 
-Flake8 plugin to detect deprecated/removed imports in Qiskit 1.0 and 2.0.
+Flake8 plugin to detect deprecated/removed imports, methods, and arguments in Qiskit 1.0 and 2.0.
 
-- **QKT100**: Imports deprecated in Qiskit 1.0 ([migration guide](https://docs.quantum.ibm.com/api/migration-guides/qiskit-1.0-features))
-- **QKT200**: Imports removed in Qiskit 2.0 ([migration guide](https://docs.quantum.ibm.com/migration-guides/qiskit-2.0))
+### Error codes
+
+| Code | What it detects |
+|------|-----------------|
+| **QKT100** | Import paths deprecated in Qiskit 1.0 ([migration guide](https://docs.quantum.ibm.com/api/migration-guides/qiskit-1.0-features)) |
+| **QKT101** | Method calls removed in Qiskit 1.0 (e.g. `.qasm()`, `.cnot()`, `.bind_parameters()`) |
+| **QKT102** | Keyword arguments removed in Qiskit 1.0 (e.g. `PassManager.append(max_iteration=...)`) |
+| **QKT200** | Import paths removed in Qiskit 2.0 ([migration guide](https://docs.quantum.ibm.com/migration-guides/qiskit-2.0)) |
+| **QKT201** | Method calls removed in Qiskit 2.0 (e.g. `.c_if()`, `.add_calibration()`, `.drive_channel()`) |
+| **QKT202** | Keyword arguments removed in Qiskit 2.0 (e.g. `transpile(backend_properties=...)`) |
+
+> [!NOTE]
+> QKT101/QKT102/QKT201 use heuristic detection (method name matching in files
+> that import `qiskit`). Without type inference, false positives are possible
+> but unlikely for the Qiskit-specific names we check. QKT202 tracks which
+> functions were imported from `qiskit` and has near-zero false positives.
 
 > [!WARNING]
-> This tool only detects deprecated import paths, it does not detect use of
-> deprecated methods (such as `QuantumCircuit.qasm`), deprecated arguments, or
-> assignments such as `qk = qiskit` (although it can handle _aliases_ such as
-> `import qiskit as qk`).
+> This tool does not detect assignments such as `qk = qiskit` (although it can
+> handle _aliases_ such as `import qiskit as qk`).
 
-This tool is to help you quickly identify deprecated imports and work out how
-to fix them. This tool is not perfect and will make some mistakes, so make sure
+This tool is to help you quickly identify deprecated API usage and work out how
+to fix it. This tool is not perfect and will make some mistakes, so make sure
 to test your project thoroughly after migrating.
 
 ## Through pipx
@@ -40,14 +52,17 @@ python -m venv .flake8-qiskit-migration-venv
 source .flake8-qiskit-migration-venv/bin/activate
 pip install flake8-qiskit-migration
 
-# Run all migration checks (QKT100 + QKT200)
+# Run all migration checks
 flake8 --select QKT <path-to-source>  # e.g. `src/`
 
-# Run only Qiskit 1.0 checks
-flake8 --select QKT100 <path-to-source>
+# Run only Qiskit 1.0 checks (imports + methods)
+flake8 --select QKT1 <path-to-source>
 
-# Run only Qiskit 2.0 checks
-flake8 --select QKT200 <path-to-source>
+# Run only Qiskit 2.0 checks (imports + methods + kwargs)
+flake8 --select QKT2 <path-to-source>
+
+# Run only import checks
+flake8 --select QKT100,QKT200 <path-to-source>
 
 # Run plugin on notebooks
 pip install nbqa
@@ -71,14 +86,14 @@ pip install flake8-qiskit-migration
 # Run all flake8 checks (including this plugin)
 flake8 <path-to-source>
 
-# Run only this plugin (both QKT100 and QKT200)
+# Run only this plugin (all checks)
 flake8 --select QKT <path-to-source>
 
 # Run only Qiskit 1.0 checks
-flake8 --select QKT100 <path-to-source>
+flake8 --select QKT1 <path-to-source>
 
 # Run only Qiskit 2.0 checks
-flake8 --select QKT200 <path-to-source>
+flake8 --select QKT2 <path-to-source>
 
 # Uninstall plugin
 pip uninstall flake8-qiskit-migration
