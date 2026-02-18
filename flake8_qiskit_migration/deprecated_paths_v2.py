@@ -8,7 +8,7 @@
 ### `qiskit.thing.otherthing` appears in EXCEPTIONS_V2.
 
 PULSE_V2 = {
-    "qiskit.pulse": "{} has been removed in Qiskit 2.0; see https://docs.quantum.ibm.com/migration-guides/qiskit-2.0#qiskitpulse",
+    "qiskit.pulse": "{} has been removed in Qiskit 2.0; see https://quantum.cloud.ibm.com/docs/guides/qiskit-2.0#qiskitpulse",
 }
 
 QOBJ_V2 = {
