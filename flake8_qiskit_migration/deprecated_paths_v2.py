@@ -75,7 +75,7 @@ TRANSPILER_V2 = {
 }
 
 RESULT_V2 = {
-    "qiskit.result.mitigation": "{} has been removed in Qiskit 2.0; consider an error mitigation library such as `mthree`",
+    "qiskit.result.mitigation": "{} has been removed in Qiskit 2.0; consider an error mitigation library such as `mthree`, or use the resilience options in `qiskit_ibm_runtime` primitives",
 }
 
 VISUALIZATION_V2 = {
