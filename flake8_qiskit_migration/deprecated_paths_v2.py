@@ -44,10 +44,10 @@ PROVIDERS_V2 = {
 }
 
 PRIMITIVES_V2 = {
-    "qiskit.primitives.Estimator": "{} has been removed in Qiskit 2.0; use `StatevectorEstimator` instead",
-    "qiskit.primitives.Sampler": "{} has been removed in Qiskit 2.0; use `StatevectorSampler` instead",
-    "qiskit.primitives.BackendEstimator": "{} has been removed in Qiskit 2.0; use `BackendEstimatorV2` instead",
-    "qiskit.primitives.BackendSampler": "{} has been removed in Qiskit 2.0; use `BackendSamplerV2` instead",
+    "qiskit.primitives.Estimator": "{} (V1 Estimator) has been removed in Qiskit 2.0; use `StatevectorEstimator` instead",
+    "qiskit.primitives.Sampler": "{} (V1 Sampler) has been removed in Qiskit 2.0; use `StatevectorSampler` instead",
+    "qiskit.primitives.BackendEstimator": "{} (V1 BackendEstimator) has been removed in Qiskit 2.0; use `BackendEstimatorV2` instead",
+    "qiskit.primitives.BackendSampler": "{} (V1 BackendSampler) has been removed in Qiskit 2.0; use `BackendSamplerV2` instead",
     "qiskit.primitives.BaseEstimator": "{} (non-versioned V1 alias) has been removed in Qiskit 2.0; replace with `BaseEstimatorV1` or `BaseEstimatorV2`",
     "qiskit.primitives.BaseSampler": "{} (non-versioned V1 alias) has been removed in Qiskit 2.0; replace with `BaseSamplerV1` or `BaseSamplerV2`",
     # Utility functions only used in V1 implementations
